@@ -34,9 +34,6 @@ class ThreeSAT:
                 for x in clause:
                     self.variables.add(abs(x))
 
-    """
-        Create a function to evalute the solution and return the number of satisfied clauses
-    """
     def evaluate(self, solution : list[int]):
         satisfied = 0
         for clause in self.clauses:

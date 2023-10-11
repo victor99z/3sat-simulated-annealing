@@ -14,8 +14,6 @@ class Annealing:
         self.score_list = []
         self.temp_list = [] # Retonar qtd de clausulas satisfeitas
 
-
-    # Calculate neighbour using initial solution and flip a random boolean
     def calc_neighbour(self):
         neighbour = self.sat.initial_solution.copy()
         generateRandomSeed = random.randint(0, len(neighbour)-1)
