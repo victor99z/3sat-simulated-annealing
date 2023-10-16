@@ -25,8 +25,6 @@ class ThreeSAT:
                 if line.startswith('c'):
                     continue
                 if line.startswith('p'):
-                    _, _, _, n = line.split()
-                    n = int(n)
                     continue
                 clause = [int(x) for x in line.split()]
                 clause.pop()
@@ -41,7 +39,7 @@ class ThreeSAT:
             b = clause[1] < 0 and not solution[abs(clause[1]) - 1] or clause[1] > 0 and solution[abs(clause[1]) - 1]
             c = clause[2] < 0 and not solution[abs(clause[2]) - 1] or clause[2] > 0 and solution[abs(clause[2]) - 1]
 
-            if a and b and c:
+            if a or b or c:
                 satisfied += 1
 
         return satisfied
