@@ -9,22 +9,23 @@ if __name__ == "__main__":
 
     files = ["uf20-01.cnf", "uf100-01.cnf", "uf250-01.cnf"]
 
-    sat = ThreeSAT("./cases/" + files[0])
+    sat = ThreeSAT("./cases/" + files[2])
 
     start_time = time()
     testing_sa = Annealing(sat=sat, max_iterations=250000, temp=1, temp_min=0.000001)
     testing_sa.run()
-    figure, axis = plt.subplots(2, 1) 
+    figure, axis = plt.subplots(2, 1)
+    plt.subplots_adjust(hspace=0.5)
 
     axis[0].plot(testing_sa.score_list) 
     axis[0].set_xlabel("Iteração")
     axis[0].set_ylabel("Clausulas satisfeitas") 
+    axis[0].set_title("SA " + str(time() - start_time))
 
     axis[1].plot(testing_sa.temp_list, color='red') 
     axis[1].set_xlabel("Iteração")
     axis[1].set_ylabel("Temperatura")
-
-    plt.savefig('./rs/' + files[0] + '_exec001.png')
+    plt.savefig('./rs/' + files[2] + '_exec001.png')
 
     # axis[2].scatter(testing_sa.acceptance_probability_list[:],testing_sa.acceptance_probability_list, color='blue') 
     # axis[2].set_title("Probabilidade de aceitação") 

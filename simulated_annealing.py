@@ -27,11 +27,11 @@ class Annealing:
             return np.exp((new_score - score) / (temp))
 
     # Cooling Schedule 4
-    # def calc_temp(self, it : int):
-    #     A = ((self.temp - self.temp_min) * (self.max_iterations + 1)) / self.max_iterations
-    #     B = self.temp - A
-    #     T = (A / (it + 1)) + B
-    #     return T
+    def calc_temp(self, it : int):
+        A = ((self.temp - self.temp_min) * (self.max_iterations + 1)) / self.max_iterations
+        B = self.temp - A
+        T = (A / (it + 1)) + B
+        return T
 
     # Cooling Schedule 1
     # def calc_temp(self, it : int):
@@ -50,12 +50,12 @@ class Annealing:
                 else:
                     calc_prob = self.acceptance_probability(self.score, new_score, self.temp)
                     print(self.score, new_score, self.temp, calc_prob, sep=";")
-                    if random.randint(0,1) < calc_prob:
+                    if random.uniform(0,1) < calc_prob:
                         self.score = new_score
                         self.sat.initial_solution = new_solution
                     self.acceptance_probability_list.append(calc_prob)
                 i += 1
-            self.temp =  self.temp * 0.95
+            self.temp =  self.temp * self.calc_temp(iterations)
             self.temp_list = np.append(self.temp_list, self.temp)
             self.score_list = np.append(self.score_list, self.score) # Salva uma lista de iterações e num de clausulas não satistifeitas
             iterations += 1
